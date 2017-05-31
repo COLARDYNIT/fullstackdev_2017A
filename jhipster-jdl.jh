@@ -15,15 +15,15 @@ entity Invoice {
 }
 
 relationship OneToMany {
-	Product{Category} to Category
+	Product to Category{Product}
 }
 
 relationship OneToMany {
-	Customer{} to Invoice{Customer}
+	Customer to Invoice{Customer}
 }
 
 relationship OneToMany {
-	Invoice{Product} to Product
+	Invoice to Product{Invoice}
 }
 paginate all with pager
 service Product with serviceImpl 
