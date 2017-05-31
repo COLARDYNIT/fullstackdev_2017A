@@ -15,6 +15,6 @@ stage ('test'){
 stage ('archive war'){
     node {
         sh "./mvnw -Pprod package"
-        archiveArtifacts '/target/*.war'
+        archiveArtifacts 'target/*.war'
     }
 }
