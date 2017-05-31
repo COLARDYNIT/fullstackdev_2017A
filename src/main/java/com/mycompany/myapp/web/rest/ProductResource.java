@@ -39,6 +39,7 @@ public class ProductResource {
     private static final String ENTITY_NAME = "product";
 
     private final ProductService productService;
+
     @Resource
     private InvoiceService invoiceService;
     @Resource

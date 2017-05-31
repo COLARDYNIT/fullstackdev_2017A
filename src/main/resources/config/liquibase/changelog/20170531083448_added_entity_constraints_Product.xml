@@ -7,12 +7,5 @@
         Added the constraints for entity Product.
     -->
     <changeSet id="20170531083448-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="invoice_id"
-                                 baseTableName="product"
-                                 constraintName="fk_product_invoice_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="invoice"/>
-
     </changeSet>
 </databaseChangeLog>
