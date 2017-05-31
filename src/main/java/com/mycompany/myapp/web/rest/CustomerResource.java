@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,5 +124,10 @@ public class CustomerResource {
         log.debug("REST request to delete Customer : {}", id);
         customerRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/customers/product/{productName}")
+    public List<Customer> findAllCustomersByProductName(@PathVariable String productName){
+        List <Customer> customers = new ArrayList<>();
+        return customers;
     }
 }
