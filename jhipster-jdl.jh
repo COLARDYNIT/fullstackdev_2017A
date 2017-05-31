@@ -1,0 +1,29 @@
+entity Product {
+	name String,
+}
+
+entity Category {
+	name String
+}
+
+entity Customer {
+	name String,
+}
+
+entity Invoice {
+	
+}
+
+relationship OneToMany {
+	Product{Category} to Category
+}
+
+relationship OneToMany {
+	Customer{} to Invoice{Customer}
+}
+
+relationship OneToMany {
+	Invoice{Product} to Product
+}
+paginate all with pager
+service Product with serviceImpl 

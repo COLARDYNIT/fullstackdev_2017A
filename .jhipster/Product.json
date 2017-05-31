@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipName": "invoice",
+            "otherEntityName": "invoice",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170531083448",
+    "entityTableName": "product",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl"
+}

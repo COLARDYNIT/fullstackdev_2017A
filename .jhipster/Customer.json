@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "invoice",
+            "otherEntityName": "invoice",
+            "otherEntityRelationshipName": "customer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170531083450",
+    "entityTableName": "customer",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "no"
+}
