@@ -8,6 +8,17 @@
     -->
     <changeSet id="20170531083451-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="invoices_id"
+                                 baseTableName="invoice_product"
+                                 constraintName="fk_invoice_product_invoices_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="invoice"/>
+        <addForeignKeyConstraint baseColumnNames="products_id"
+                                 baseTableName="invoice_product"
+                                 constraintName="fk_invoice_product_products_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+        
         <addForeignKeyConstraint baseColumnNames="customer_id"
                                  baseTableName="invoice"
                                  constraintName="fk_invoice_customer_id"

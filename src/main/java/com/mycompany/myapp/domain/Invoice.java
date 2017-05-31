@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,9 +23,11 @@ public class Invoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "invoice")
-    @JsonIgnore
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "invoice_product",
+               joinColumns = @JoinColumn(name="invoices_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="products_id", referencedColumnName="id"))
     private Set<Product> products = new HashSet<>();
 
     @ManyToOne
@@ -51,13 +52,13 @@ public class Invoice implements Serializable {
 
     public Invoice addProduct(Product product) {
         this.products.add(product);
-        product.setInvoice(this);
+        product.getInvoices().add(this);
         return this;
     }
 
     public Invoice removeProduct(Product product) {
         this.products.remove(product);
-        product.setInvoice(null);
+        product.getInvoices().remove(this);
         return this;
     }
 

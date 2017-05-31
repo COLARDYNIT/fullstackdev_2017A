@@ -2,12 +2,11 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Customer;
-
 import com.mycompany.myapp.repository.CustomerRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,10 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +38,11 @@ public class CustomerResource {
     public CustomerResource(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
+
+    @Resource
+    private ProductResource productResource;
+
+
 
     /**
      * POST  /customers : Create a new customer.
@@ -126,8 +129,8 @@ public class CustomerResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
     @GetMapping("/customers/product/{productName}")
-    public List<Customer> findAllCustomersByProductName(@PathVariable String productName){
-        List <Customer> customers = new ArrayList<>();
+    public List<Customer> getCustomersForProduct(@PathVariable String productName){
+        List<Customer> customers = productResource.findCustomersForProduct(productName);
         return customers;
     }
 }

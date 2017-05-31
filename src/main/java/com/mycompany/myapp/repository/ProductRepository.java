@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
+    public Product findOneByName(String name);
+
 }

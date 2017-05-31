@@ -1,12 +1,16 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Customer;
+import com.mycompany.myapp.domain.Invoice;
 import com.mycompany.myapp.domain.Product;
+import com.mycompany.myapp.service.CustomerService;
+import com.mycompany.myapp.service.InvoiceService;
 import com.mycompany.myapp.service.ProductService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,9 +20,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +39,10 @@ public class ProductResource {
     private static final String ENTITY_NAME = "product";
 
     private final ProductService productService;
+    @Resource
+    private InvoiceService invoiceService;
+    @Resource
+    private CustomerService customerService;
 
     public ProductResource(ProductService productService) {
         this.productService = productService;
@@ -122,5 +131,19 @@ public class ProductResource {
         log.debug("REST request to delete Product : {}", id);
         productService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    public List<Customer> findCustomersForProduct(String productName) {
+        Product product = productService.findOne(productName);
+        List<Invoice> invoices = invoiceService.findAllByProduct(product);
+        List<Customer> customers = new ArrayList<>();
+        for (Invoice invoice : invoices) {
+            Customer customer = customerService.findOneByInvoice(invoice);
+            //avoid adding a customer twice
+            if (customer != null && !customers.contains(customer)) {
+                customers.add(customer);
+            }
+        }
+        return customers;
     }
 }

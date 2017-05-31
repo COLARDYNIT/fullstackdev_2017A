@@ -8,10 +8,11 @@
             "otherEntityRelationshipName": "product"
         },
         {
+            "relationshipType": "many-to-many",
             "relationshipName": "invoice",
             "otherEntityName": "invoice",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "ownerSide": false,
+            "otherEntityRelationshipName": "product"
         }
     ],
     "fields": [

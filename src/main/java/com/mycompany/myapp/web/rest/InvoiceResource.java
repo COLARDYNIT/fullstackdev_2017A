@@ -107,7 +107,7 @@ public class InvoiceResource {
     @Timed
     public ResponseEntity<Invoice> getInvoice(@PathVariable Long id) {
         log.debug("REST request to get Invoice : {}", id);
-        Invoice invoice = invoiceRepository.findOne(id);
+        Invoice invoice = invoiceRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(invoice));
     }
 

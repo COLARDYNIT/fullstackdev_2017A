@@ -49,6 +49,7 @@ public class CacheConfiguration {
             cm.createCache(com.mycompany.myapp.domain.Customer.class.getName() + ".invoices", jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Invoice.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Invoice.class.getName() + ".products", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.Product.class.getName() + ".invoices", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

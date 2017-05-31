@@ -7,8 +7,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Product.
@@ -32,8 +32,10 @@ public class Product implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Category> categories = new HashSet<>();
 
-    @ManyToOne
-    private Invoice invoice;
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Invoice> invoices = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -81,17 +83,29 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public Set<Invoice> getInvoices() {
+        return invoices;
     }
 
-    public Product invoice(Invoice invoice) {
-        this.invoice = invoice;
+    public Product invoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
         return this;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public Product addInvoice(Invoice invoice) {
+        this.invoices.add(invoice);
+        invoice.getProducts().add(this);
+        return this;
+    }
+
+    public Product removeInvoice(Invoice invoice) {
+        this.invoices.remove(invoice);
+        invoice.getProducts().remove(this);
+        return this;
+    }
+
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
     }
 
     @Override

@@ -22,8 +22,8 @@ relationship OneToMany {
 	Customer to Invoice{Customer}
 }
 
-relationship OneToMany {
-	Invoice to Product{Invoice}
+relationship ManyToMany {
+	Invoice{Product} to Product{Invoice}
 }
 paginate all with pager
 service Product with serviceImpl 

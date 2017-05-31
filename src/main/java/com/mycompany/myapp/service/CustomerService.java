@@ -1,44 +1,45 @@
 package com.mycompany.myapp.service;
 
-import com.mycompany.myapp.domain.Product;
+import com.mycompany.myapp.domain.Customer;
+import com.mycompany.myapp.domain.Invoice;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing Product.
  */
-public interface ProductService {
+public interface CustomerService {
 
     /**
-     * Save a product.
+     * Save a customer.
      *
-     * @param product the entity to save
+     * @param customer the entity to save
      * @return the persisted entity
      */
-    Product save(Product product);
+    Customer save(Customer customer);
 
     /**
-     *  Get all the products.
+     *  Get all the customers.
      *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Product> findAll(Pageable pageable);
+    Page<Customer> findAll(Pageable pageable);
 
     /**
-     *  Get the "id" product.
+     *  Get the "id" customer.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    Product findOne(Long id);
-
-    Product findOne(String name);
+    Customer findOne(Long id);
 
     /**
-     *  Delete the "id" product.
+     *  Delete the "id" customer.
      *
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    public Customer findOneByInvoice(Invoice invoice);
 }

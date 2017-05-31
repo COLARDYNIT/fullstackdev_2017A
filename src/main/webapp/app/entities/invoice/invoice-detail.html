@@ -4,6 +4,12 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Product</span></dt>
+        <dd>
+            <span ng-repeat="product in vm.invoice.products">
+                <a ui-sref="product-detail({id: product.id})">{{product.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
         <dt><span>Customer</span></dt>
         <dd>
             <a ui-sref="customer-detail({id:vm.invoice.customer.id})">{{vm.invoice.customer.id}}</a>

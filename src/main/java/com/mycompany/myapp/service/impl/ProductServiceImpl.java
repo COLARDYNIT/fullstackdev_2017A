@@ -64,6 +64,11 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findOne(id);
     }
 
+    @Override
+    public Product findOne(String name) {
+        return productRepository.findOneByName(name);
+    }
+
     /**
      *  Delete the  product by id.
      *
